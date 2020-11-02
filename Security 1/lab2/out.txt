@@ -1,0 +1,15 @@
+one uariation to the standard caesar cipher is vhen
+the alphabet is "keYed" bY Xsing a vord. in the
+traditional uarietY, one coXld vrite the alphabet on
+tvo strips and jXst match Xp the strips after sliding
+the bottom strip to the left or right. to encode, YoX
+voXld find a letter in the top rov and sXbstitXte it
+for the letter in the bottom rov. for a keYed uersion,
+one voXld not Xse a standard alphabet, bXt voXld first
+vrite a vord (omitting dXplicated letters) and then
+vrite the remaining letters of the alphabet. for the
+eWample belov, i Xsed a keY of "rXmkin.com" and YoX vill see
+that the period is remoued becaXse it is not a letter.
+YoX vill also notice the second "m" is not inclXded
+becaXse there vas an m alreadY and YoX can't haue
+dXplicates.
