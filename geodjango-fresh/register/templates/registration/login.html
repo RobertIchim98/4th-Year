@@ -1,0 +1,16 @@
+{% include 'base/base.html' %}
+
+<div class="card">
+    <h5 class="card-header">Login</h5>
+    <div class="card-body">
+        {% load crispy_forms_tags %} {% block content %}
+        <form method="POST" class="form-group">
+            {% csrf_token %} {{form|crispy}}
+            <p>Dont have an account? Create one <a href="/register">here</a></p>
+            <button type="submit" class="btn btn-success">Login</button>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}

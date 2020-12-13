@@ -1,0 +1,68 @@
+{% include 'base/base.html' %} {% csrf_token %} {% load leaflet_tags %}
+
+<head>
+    {% leaflet_js %} {% leaflet_css %}
+</head>
+
+{% if user.is_authenticated %}
+<h1> This is where you are {{user.username}} ! </h1>
+
+<div class="alert alert-info" role="alert">
+    <p id="status"></p>
+    <a id="map-link" target="_blank"></a>
+</div>
+<script>
+    function map_init_basic(map, options) {
+
+        const status = document.querySelector('#status');
+        const mapLink = document.querySelector('#map-link');
+
+        mapLink.href = '';
+        mapLink.textContent = '';
+
+        function success(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            status.textContent = '';
+            mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+            var marker = L.marker([latitude, longitude]).addTo(map);
+            L.circle([latitude, longitude], {
+                color: "blue",
+                fillColor: "blue",
+                fillOpacity: 0.5,
+                radius: 100.0
+            }).addTo(map);
+
+            marker.on('click', function(e) {
+                map.setView(e.latlng, 13);
+            });
+        }
+
+        function error() {
+            status.textContent = 'Unable to retrieve your location';
+        }
+
+        if (!navigator.geolocation) {
+            status.textContent = 'Geolocation is not supported by your browser';
+        } else {
+            status.textContent = 'Locating…';
+            navigator.geolocation.getCurrentPosition(success, error);
+        }
+
+        document.querySelector('#find-me').addEventListener('click', geoFindMe);
+    }
+</script>
+
+<body>
+    <div class="card">
+        <h5 class="card-header">Location</h5>
+        <div class="card-body">
+            {% leaflet_map "yourmap" callback="window.map_init_basic" %}
+        </div>
+    </div>
+</body>
+
+{% else %}
+<h1>Please login first!</h1>
+{% endif %}

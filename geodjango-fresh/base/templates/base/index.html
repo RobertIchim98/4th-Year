@@ -1,0 +1,11 @@
+{% include 'base/base.html' %} 
+{% csrf_token %}
+
+{% if user.is_authenticated %}
+<h1> Hello {{user.username}} ! </h1>
+<p>Have a look at the map!</p>
+
+{% else %}
+<h1>Hello User!</h1>
+<p> You are currently not logged in </p>
+{% endif %}
